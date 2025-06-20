@@ -1,8 +1,8 @@
 
 #include <iostream>
 #include <vector>
-#include "D84069055.h"
-#include "Poor_Ai1.h"
+#include "AI1.h"
+#include "Player.h"
 #include <cstdio> 
 #define STUDENT 2
 using namespace std;
@@ -12,6 +12,7 @@ bool isFull(vector < vector<char> >); //Examine if the board is full
 bool legalMove(vector < vector<char> >, int); //Check if the last move is legal
 vector < vector<char> > move(vector < vector<char> >, int, char); //Drop a new disc in the board
 void output(vector < vector<char> >); //Show the board
+void printScore(); //Display current scoreboard
 int count_win1 = 0; //Win count of player1
 int count_win2 = 0; //Win count of player2
 int count_draw = 0; //Win count of draw
@@ -33,7 +34,7 @@ int main() {
 //E24056289;
 	int t = 0;
 
-	for (int k = 1; k <= 10; k++) { //Play 100 games
+        for (int k = 1; k <= 10; k++) { //Play 10 games
 		//New Game Starts
 	   // system("cls"); 
 		cout << "---------------New Game---------------" << endl << endl;
@@ -76,13 +77,12 @@ int main() {
 				output(p);
 				system("pause");
 				t = !t;
-			}
-		}
-	}
-	system("cls");
-	cout << "Player1 wins " << count_win1 << " times" << endl;
-	cout << "Player2 wins " << count_win2 << " times" << endl;
-	cout << "Draw " << count_draw << " times" << endl << endl;
+                        }
+                }
+                printScore();
+        }
+        system("cls");
+        printScore();
 	if (count_win1 > count_win2) {
 		cout << "Player1 is the winner!!!" << endl;
 		system("pause");
@@ -228,8 +228,8 @@ vector < vector<char> > move(vector < vector<char> > b3, int c2, char d2) {
 }
 
 void output(vector < vector<char> > b4) {
-	cout << "        1    2    3    4    5    6    7" << endl;
-	cout << "     =================================" << endl;
+        cout << "        1    2    3    4    5    6    7" << endl;
+        cout << "     =================================" << endl;
 	for (int i = 0; i < 6; i++) {
 		cout << "  " << i << "  |";
 		for (int j = 0; j < 7; j++) {
@@ -239,5 +239,11 @@ void output(vector < vector<char> > b4) {
 		cout << endl;
 
 	}
-	cout << "     =================================" << endl;
+        cout << "     =================================" << endl;
+}
+
+void printScore() {
+        cout << "Player1 wins " << count_win1 << " times" << endl;
+        cout << "Player2 wins " << count_win2 << " times" << endl;
+        cout << "Draw " << count_draw << " times" << endl << endl;
 }
