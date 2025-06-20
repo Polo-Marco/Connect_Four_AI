@@ -21,7 +21,7 @@ void display(vector<vector<int> > board) {
 bool drawj(vector<vector<int> > board) {
 	int disc_left = 0;
 	for (int i = 0; i < ai_col; i++) {
-		if (board[0][i] == 0) {//算是否滿
+		if (board[0][i] == 0) {
 			disc_left++;
 		}
 	}
@@ -43,7 +43,7 @@ int deptrans(int dep) {
 		}
 
 	}
-	//cout << "deptrans dep=" << dep << " deptrans disc= " << disc;
+
 	return disc;
 }
 float value(vector<vector<int> > board) {
@@ -79,10 +79,7 @@ float value(vector<vector<int> > board) {
 }
 float value1(vector<vector<int> > board) {
 	int total = 0; int mydisc = 1, oppdisc = -1, winj = value(board);
-	//cout << "\n!!!!!!!!!!!" << endl;
-	//display(board);
-	//cout << endl;
-	if (drawj(board))return 0.5;//平手
+	if (drawj(board))return 0.5;
 	if (winj < 0) {
 		total -= 1000;
 		return total;
@@ -92,14 +89,14 @@ float value1(vector<vector<int> > board) {
 		return total;
 	}
 	int count = 0, Decount = 0;
-	for (int i = 0; i < ai_row; i++) {//獎勵放中線
+	for (int i = 0; i < ai_row; i++) {
 		if (board[i][3] == mydisc) {
 			total += 10;
 		}
 	}
-	for (int i = 0; i < ai_row; i++) {//attack 判斷連線一次取四子
+	for (int i = 0; i < ai_row; i++) {
 		for (int j = 0; j < ai_col; j++) {
-			if (j + 3 < ai_col) {//橫向判斷
+			if (j + 3 < ai_col) {
 				count = 0; Decount = 0;
 				for (int x = 0; x < 4; x++) {
 					if (board[i][j + x] == mydisc) {
@@ -119,10 +116,10 @@ float value1(vector<vector<int> > board) {
 						x = 4;
 					}
 				}
-				if (count == 2) {//有兩子
+				if (count == 2) {
 					total += 2;
 				}
-				else if (count == 3) {//有三子
+				else if (count == 3) {
 					total += 5;
 				}
 				if (Decount == 2) {
@@ -132,7 +129,7 @@ float value1(vector<vector<int> > board) {
 					total -= 100;
 				}
 			}
-			if (i + 3 < ai_row) {//直向判斷
+			if (i + 3 < ai_row) {
 				count = 0; Decount = 0;
 				for (int x = 0; x < 4; x++) {
 					if (board[i + x][j] == mydisc) {
@@ -152,10 +149,10 @@ float value1(vector<vector<int> > board) {
 						x = 4;
 					}
 				}
-				if (count == 2) {//有兩子
+				if (count == 2) {
 					total += 2;
 				}
-				else if (count == 3) {//有三子
+				else if (count == 3) {
 					total += 5;
 				}
 				if (Decount == 2) {
@@ -165,7 +162,7 @@ float value1(vector<vector<int> > board) {
 					total -= 100;
 				}
 			}
-			if ((j + 3 < ai_col) && (i + 3 < ai_row)) {//左下右上判斷
+			if ((j + 3 < ai_col) && (i + 3 < ai_row)) {
 				count = 0; Decount = 0;
 				for (int x = 0; x < 4; x++) {
 					if (board[i + x][j + x] == mydisc) {
@@ -185,10 +182,10 @@ float value1(vector<vector<int> > board) {
 						x = 4;
 					}
 				}
-				if (count == 2) {//有兩子
+				if (count == 2) {
 					total += 2;
 				}
-				else if (count == 3) {//有三子
+				else if (count == 3) {
 					total += 5;
 				}
 				if (Decount == 2) {
@@ -198,13 +195,13 @@ float value1(vector<vector<int> > board) {
 					total -= 100;
 				}
 			}
-			if ((j - 3 >= 0) && (i + 3 < ai_row)) {//右上左下
+			if ((j - 3 >= 0) && (i + 3 < ai_row)) {
 				count = 0; Decount = 0;
 				for (int x = 0; x < 4; x++) {
 					if (board[i + x][j - x] == mydisc) {
 						count++;
 					}
-					if (board[i + x][j - x] == oppdisc) {//防守判斷
+					if (board[i + x][j - x] == oppdisc) {
 						count = 0;
 						x = 4;
 					}
@@ -218,10 +215,10 @@ float value1(vector<vector<int> > board) {
 						x = 4;
 					}
 				}
-				if (count == 2) {//有兩子
+				if (count == 2) {
 					total += 2;
 				}
-				else if (count == 3) {//有三子
+				else if (count == 3) {
 					total += 5;
 				}
 				if (Decount == 2) {
@@ -233,14 +230,12 @@ float value1(vector<vector<int> > board) {
 			}
 		}
 	}
-	//cout << "\ntotal= " << total<<endl;
-	//system("pause");
 	return total;
 
 }
 void findposmove(vector<vector<int> > board, int* simboard1) {
 	for (int i = 0; i < ai_col; i++) {
-		simboard1[i] = -1;//任務欄初始
+		simboard1[i] = -1;
 		for (int j = ai_row - 1; j >= 0; j--) {
 			if (board[j][i] == 0) {
 				simboard1[i] = j;
@@ -251,9 +246,7 @@ void findposmove(vector<vector<int> > board, int* simboard1) {
 }
 void setorback(vector<vector<int> > &board, int dep, int *simboard, int choice) {//-1 set 0 back
 	int disc;
-	//cout << "set start";
-	disc = deptrans(dep);//放置版面用
-	//cout << "disc put!!!!!" << disc;
+	disc = deptrans(dep);
 	if (choice == -1) {
 		for (int i = 0; i < ai_col; i++) {
 			if (simboard[i] >= 0) {
@@ -271,15 +264,9 @@ void setorback(vector<vector<int> > &board, int dep, int *simboard, int choice) 
 			}
 		}
 	}
-	//display(board);
-	//system("pause");
 }
 float dfsuntil(vector<vector<int> > board, int dep) {
-	//cout << "\ndisplay dep=" << dep << endl;
 	float val = value1(board); int move = 0; float bestS = 0;
-	//display(board);
-	//cout << val << endl;
-	//system("pause");
 	if (dep < 0 || val>150 || val < (-950) || val == 0.5) {
 		return val;
 	}
@@ -291,14 +278,12 @@ float dfsuntil(vector<vector<int> > board, int dep) {
 	}
 	float buf = 0; int simboard1[ai_col];
 	findposmove(board, simboard1);
-	//cout << "posmove !!!!!!!!" << simboard1[0];
 	for (int i = 0; i < ai_col; i++) {
 		if (simboard1[i] >= 0) {
-			//cout << "!!sim/i" << simboard1[i] << " " << i << endl;;
 			setorback(board, dep, simboard1, -1);
 			buf = dfsuntil(board, dep - 1);
 			if (depth == dep) {
-				cout << " " << i << ":" << buf;
+				cout << "Values for move " << i << " is " << buf <<endl;
 			}
 			if ((depth - (dep + 1)) % 2) {
 				if (bestS < buf) {
@@ -317,27 +302,18 @@ float dfsuntil(vector<vector<int> > board, int dep) {
 		}
 	}
 	if (dep == depth) {
-		//cout << "re move";
-		//system("pause");
 		return move;
 	}
 	else {
-		//cout << "return bestS "<<bestS<<endl;
 		return bestS;
 	}
 
 }
-/*int fmpreboard(vector<vector<int> > board) {//先手牌庫
-
-}
-int smpreboard(vector<vector<int> > board) {//後手牌庫
-
-}*/
 int ai(vector<vector<char> > board, char mydisc, char oppdisc) {
 	int disc_left = disc_tot, move = 0, count = 0; int simboard1[ai_col] = { -1,-1,-1,-1,-1,-1,-1 };
 	vector < vector<int> > aiboard(ai_row, vector<int>(ai_col, 0));
 	for (int i = 0; i < ai_col; i++) {
-		for (int j = 0; j < ai_row; j++) {//數字化
+		for (int j = 0; j < ai_row; j++) {
 			if (board[j][i] == mydisc) {
 				aiboard[j][i] = 1;
 				count++;
@@ -348,29 +324,6 @@ int ai(vector<vector<char> > board, char mydisc, char oppdisc) {
 			}
 		}
 	}
-	/*display(aiboard);
-	cout << endl;
-	for (int i = 0; i < ai_col; i++) {
-		for (int j = ai_row-1; j >=0; j--) {
-			if (aiboard[j][i] == 0) {
-				simboard1[i] = j;
-				j = -1;
-			}
-		}
-	}
-	for (int i = 0; i < ai_col; i++) {
-		if (simboard1[i] >= 0) {
-			aiboard[simboard1[i]][i] = 1;
-		}
-		if (value(aiboard) > 0) {
-			move = i;
-			i = ai_col;
-		}
-		else {
-			aiboard[simboard1[i]][i] = 0;
-		}
-	}
-	display(aiboard);*/
 	if (!move) {
 		if (count < 10) {
 			depth = 2;
@@ -391,30 +344,23 @@ int ai(vector<vector<char> > board, char mydisc, char oppdisc) {
 			depth = disc_tot - count;
 		}
 	}
-	cout << "目前步數= " << count << " 目前深度= " << depth << endl;
+	cout << "Current discs: " << count << " Current DFS depth: " << depth << endl;
 	move = dfsuntil(aiboard, depth);
 	return move;
 }
-int D84069055(const vector < vector<char> > &, char, char);
 
-int D84069055(const vector < vector<char> > &b, char mydisc, char yourdisc) {
+int MinMaxDFS(const vector < vector<char> > &b, char mydisc, char yourdisc) {
 	static const char me = mydisc; //Record the disc type main function assigns for this AI. It never changes once assigned
 	static const char opponent = yourdisc; //Record the disc type main function assigns for another AI. It never changes once assigned
 	int column = 0; int choice = 0;
-	//Write a simple AI for testing
-	//movejudge++;
-	//cout << "movejudge= " << movejudge << endl;
-	//system("pause");
-	//cout<<"要看ㄇ?";
-	//cin>>choice;
-	cout << "Mark-Z  ";
+	cout << "MinMaxDFS AI" << endl;
 	if (choice) {
 		cin >> column;
 	}
 	else {
 		column = ai(b, mydisc, yourdisc);
 	}
-	cout << endl << "Mark-Z選擇下 " << column + 1 << endl;
+	cout << endl << "MinMaxDFS AI drop disc at " << column + 1 <<" column" <<endl;
 	//Write a simple AI for testing
 	return column;
 }

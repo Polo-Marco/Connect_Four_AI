@@ -27,8 +27,8 @@ int main() {
        int col; //Store the column AI determines
 	char disc[3] = { 'O', 'X' ,' ' };
 	int(*op[STUDENT])(const vector < vector<char> > &map, char D1, char D2);
-	op[0] = D84069055; //AI's function name
-	op[1] = poor1;
+	op[0] = MinMaxDFS; //AI's function name
+	op[1] = player1;
 	int t = 0;
 
         for (int k = 1; k <= 10; k++) { //Play 10 games
@@ -186,7 +186,6 @@ bool isFull(vector < vector<char> > b2) {
 	if (count_empty == 42) {
 		cout << "Draw Game!" << endl;
 		count_draw++;
-		//pauseConsole();
 		return 1;
 	}
 	return 0;
@@ -198,7 +197,6 @@ bool legalMove(vector < vector<char> > o, int c1) {
 	}
 	else {
 		cout << "This column is full" << endl;
-		//pauseConsole();
 		return 0;
 	}
 }
