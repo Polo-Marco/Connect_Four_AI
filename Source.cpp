@@ -22,9 +22,8 @@ int count_draw = 0; //Win count of draw
 
 int main() {
 	const vector < vector<char> > board(6, vector<char>(7, 0)); //Store the board in 6x7 vector
-	vector < vector<char> > p; //Store the board temporarily
-	int draw = 0; //Draw count
-	int col; //Store the column AI determines
+       vector < vector<char> > p; //Store the board temporarily
+       int col; //Store the column AI determines
 	char disc[3] = { 'O', 'X' ,' ' };
 	int(*op[STUDENT])(const vector < vector<char> > &map, char D1, char D2);
 	op[0] = D84069055; //AI's function name
