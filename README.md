@@ -23,7 +23,7 @@ This was my **first project involving data structures and algorithms**, and it m
 
 Here’s a snapshot of the game interface:
 
-![Game Demo](assets/example.jpg)
+![Game Demo](assets/example.png)
 
 ## ⚙️ How to Run (on macOS)
 
