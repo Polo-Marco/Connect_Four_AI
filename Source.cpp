@@ -28,13 +28,7 @@ int main() {
 	char disc[3] = { 'O', 'X' ,' ' };
 	int(*op[STUDENT])(const vector < vector<char> > &map, char D1, char D2);
 	op[0] = D84069055; //AI's function name
-	op[1] =
-		poor1;
-	//AI;
-//	E24076629;
-//E64056122;
-//poor1;
-//E24056289;
+	op[1] = poor1;
 	int t = 0;
 
         for (int k = 1; k <= 10; k++) { //Play 10 games
@@ -49,9 +43,6 @@ int main() {
 			while (true) {
 				cls();
 				output(p);
-				/* cout << "Player1 wins " << count_win1 << " times" << endl;
-	   cout << "Player2 wins " << count_win2 << " times" << endl;
-	   cout << "Draw " << count_draw << " times" << endl << endl;*/
 				cout << "  << Player" << t + 1 << "'s turn >>\n" << endl;
 				col = op[t](p, disc[t], disc[!t]);
 				if (isGameover(p, col, disc[t])) {
@@ -68,9 +59,6 @@ int main() {
 			while (true) {
 				cls();
 				output(p);
-				/*cout << "Player1 wins " << count_win1 << " times" << endl;
-	 cout << "Player2 wins " << count_win2 << " times" << endl;
-	 cout << "Draw " << count_draw << " times" << endl << endl;*/
 				cout << "  << Player" << t + 1 << "'s turn >>\n" << endl;
 				col = op[t](p, disc[t], disc[!t]);
 				if (isGameover(p, col, disc[t])) {
