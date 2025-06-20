@@ -3,9 +3,12 @@
 #include <vector>
 #include "AI1.h"
 #include "Player.h"
-#include <cstdio> 
+#include <cstdio>
 #define STUDENT 2
 using namespace std;
+
+void cls(); //platform independent clear
+void pauseConsole(); //platform independent pause
 bool isGameover(vector < vector<char> >, int, char); //Examine if this round ends
 bool sbWin(vector < vector<char> >, char); //Examine if anyone wins at last move
 bool isFull(vector < vector<char> >); //Examine if the board is full
@@ -36,7 +39,7 @@ int main() {
 
         for (int k = 1; k <= 10; k++) { //Play 10 games
 		//New Game Starts
-	   // system("cls"); 
+	   // cls(); 
 		cout << "---------------New Game---------------" << endl << endl;
 		p = board;
 		//Player1: Student, Player2: Poor_AI
@@ -44,7 +47,7 @@ int main() {
 		if (k % 2 == 0) { //Player1 drops discs first
 			t = 0;
 			while (true) {
-				system("cls");
+				cls();
 				output(p);
 				/* cout << "Player1 wins " << count_win1 << " times" << endl;
 	   cout << "Player2 wins " << count_win2 << " times" << endl;
@@ -56,14 +59,14 @@ int main() {
 				}
 				p = move(p, col, disc[t]);
 				output(p);
-				system("pause");
+				pauseConsole();
 				t = !t;
 			}
 		}
 		else { //Player2 drops discs first
 			t = 1;
 			while (true) {
-				system("cls");
+				cls();
 				output(p);
 				/*cout << "Player1 wins " << count_win1 << " times" << endl;
 	 cout << "Player2 wins " << count_win2 << " times" << endl;
@@ -75,27 +78,27 @@ int main() {
 				}
 				p = move(p, col, disc[t]);
 				output(p);
-				system("pause");
+				pauseConsole();
 				t = !t;
                         }
                 }
                 printScore();
         }
-        system("cls");
+        cls();
         printScore();
 	if (count_win1 > count_win2) {
 		cout << "Player1 is the winner!!!" << endl;
-		system("pause");
+		pauseConsole();
 	}
 	else if (count_win1 == count_win2) {
 		cout << "Both Player1 and Player2 are winners!!!";
-		system("pause");
+		pauseConsole();
 	}
 	else {
 		cout << "Player2 is the winner!!!" << endl;
-		system("pause");
+		pauseConsole();
 	}
-	system("pause");
+	pauseConsole();
 	return 0;
 }
 
@@ -106,12 +109,12 @@ bool isGameover(vector < vector<char> > bb, int c, char d) {
 		if (d == 'O') {
 			cout << "Player2 wins!" << endl;
 			count_win2++;
-			system("pause");
+			pauseConsole();
 		}
 		else {
 			cout << "Player1 wins!" << endl;
 			count_win1++;
-			system("pause");
+			pauseConsole();
 		}
 		return 1;
 	}
@@ -122,13 +125,13 @@ bool isGameover(vector < vector<char> > bb, int c, char d) {
 				output(bb);
 				cout << "Player1 wins!" << endl;
 				count_win1++;
-				system("pause");
+				pauseConsole();
 			}
 			else {
 				output(bb);
 				cout << "Player2 wins!" << endl;
 				count_win2++;
-				system("pause");
+				pauseConsole();
 			}
 			return 1;
 		}
@@ -141,12 +144,12 @@ bool isGameover(vector < vector<char> > bb, int c, char d) {
 		if (d == 'O') {
 			cout << "Player2 wins!" << endl;
 			count_win2++;
-			system("pause");
+			pauseConsole();
 		}
 		else {
 			cout << "Player1 wins!" << endl;
 			count_win1++;
-			system("pause");
+			pauseConsole();
 		}
 		return 1;
 	}
@@ -195,7 +198,7 @@ bool isFull(vector < vector<char> > b2) {
 	if (count_empty == 42) {
 		cout << "Draw Game!" << endl;
 		count_draw++;
-		//system("pause");
+		//pauseConsole();
 		return 1;
 	}
 	return 0;
@@ -207,7 +210,7 @@ bool legalMove(vector < vector<char> > o, int c1) {
 	}
 	else {
 		cout << "This column is full" << endl;
-		//system("pause");
+		//pauseConsole();
 		return 0;
 	}
 }
@@ -246,4 +249,21 @@ void printScore() {
         cout << "Player1 wins " << count_win1 << " times" << endl;
         cout << "Player2 wins " << count_win2 << " times" << endl;
         cout << "Draw " << count_draw << " times" << endl << endl;
+}
+
+void cls() {
+#ifdef _WIN32
+        system("cls");
+#else
+        system("clear");
+#endif
+}
+
+void pauseConsole() {
+#ifdef _WIN32
+        system("pause");
+#else
+        system("read -n 1 -s -r -p 'Press any key to continue'");
+        cout << endl;
+#endif
 }
