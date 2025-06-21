@@ -283,7 +283,7 @@ float dfsuntil(vector<vector<int> > board, int dep) {
 			setorback(board, dep, simboard1, -1);
 			buf = dfsuntil(board, dep - 1);
 			if (depth == dep) {
-				cout << "Values for move " << i << " is " << buf <<endl;
+				cout << "Values for move " << i+1 << " is " << buf <<endl;
 			}
 			if ((depth - (dep + 1)) % 2) {
 				if (bestS < buf) {

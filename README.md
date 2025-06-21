@@ -13,7 +13,7 @@ The core of the AI is built using:
 - **Minimax Strategy** for decision making  
 - **Depth-First Search (DFS)** for exploring move possibilities
 
-To better handle the tournament’s time constraints, I designed improved heuristics for both **opening** and **endgame** situations.
+To better handle the tournament’s time constraints, I designed improved search strategies for both **opening** and **endgame** situations.
 
 ## 📚 Significance
 
